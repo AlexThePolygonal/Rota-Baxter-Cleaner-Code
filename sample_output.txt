@@ -1,0 +1,204 @@
+The number of classes is 6
+Below is the description of the classes
+Operators in C1 have the following shape:
+[ c  0 -a  0]
+[ 0  c  0  a]
+[-b  0 -c  0]
+[ 0  b  0  c]
+and their elements must lie in the ideal [a*b + c^2] over the polynomial ring
+Its dimension as a projective variety is 1
+It is smooth
+
+Operators in C2 have the following shape:
+[ 0  0  c  b]
+[ c -b  0  0]
+[ 0  0  b  a]
+[ b  a  0  0]
+and their elements must lie in the ideal [-b^2 + a*c] over the polynomial ring
+Its dimension as a projective variety is 1
+It is smooth
+
+Operators in C3 have the following shape:
+[ b -c  0  0]
+[-a -b  0  0]
+[ 0  0  b  c]
+[ 0  0  a  b]
+and their elements must lie in the ideal [b^2 + a*c] over the polynomial ring
+Its dimension as a projective variety is 1
+It is smooth
+
+Operators in C4 have the following shape:
+[ 0  a  0  b]
+[ 0  b  0  c]
+[ a  0 -b  0]
+[ b  0  c  0]
+and their elements must lie in the ideal [-b^2 + a*c] over the polynomial ring
+Its dimension as a projective variety is 1
+It is smooth
+
+Operators in A have the following shape:
+[ b  e  h  g]
+[ h  g  d  a]
+[ c  f -b -e]
+[ b  e  h  g]
+and their elements must lie in the ideal [b*g - e*h, -e^2 + f*g, -b*e + f*h, -b*e + c*g, -b^2 + c*h, c*e - b*f, a*e + g^2, a*b + g*h, a*f + e*g, a*c + e*h, d*g - a*h, d*e + g*h, b*d + h^2, d*f + e*h, c*d + b*h] over the polynomial ring
+Its dimension as a projective variety is 2
+It is smooth
+
+Operators in B have the following shape:
+[ a  c  g  e]
+[ f -a  b -g]
+[ c  d  e  h]
+[ a  c  g  e]
+and their elements must lie in the ideal [a*e - c*g, e^2 + g*h, c*e + a*h, d*e - c*h, c*e + d*g, c^2 + a*d, b*e - g^2, b*c - a*g, e*g + b*h, b*d + c*g, e*f - a*g, -a*b + f*g, -a^2 + c*f, c*g + f*h, a*c + d*f] over the polynomial ring
+Its dimension as a projective variety is 2
+It is smooth
+
+
+
+
+
+Operators in A∩B have the following shape:
+[-e  b  d  e]
+[ d  e  a -d]
+[ b  c  e -b]
+[ e  b  d  e]
+and their elements must lie in the ideal [d^2 - a*e, b*d + e^2, c*d + b*e, b^2 - c*e, a*b + d*e, a*c - e^2] over the polynomial ring
+Its dimension as a projective variety is 1
+It is smooth
+
+The orbit of the point
+[0 0 0 0]
+[0 0 0 0]
+[0 1 0 0]
+[0 0 0 0]
+lies in the component A∩B
+The map from SL_2 is given by
+[ c^2*d^2    c*d^3   -c^3*d -c^2*d^2]
+[  -c^3*d -c^2*d^2      c^4    c^3*d]
+[   c*d^3      d^4 -c^2*d^2   -c*d^3]
+[-c^2*d^2   -c*d^3    c^3*d  c^2*d^2]
+And the stabilizer by the ideal
+Ideal (c, a*d - 1, a^2 - d^2, d^3 - a) of Multivariate Polynomial Ring in a, b, c, d over Rational Field
+
+The orbit of the point
+[0 0 0 0]
+[0 0 1 0]
+[0 0 0 0]
+[0 0 0 0]
+lies in the component A∩B
+The map from SL_2 is given by
+[ a^2*b^2    a*b^3   -a^3*b -a^2*b^2]
+[  -a^3*b -a^2*b^2      a^4    a^3*b]
+[   a*b^3      b^4 -a^2*b^2   -a*b^3]
+[-a^2*b^2   -a*b^3    a^3*b  a^2*b^2]
+And the stabilizer by the ideal
+Ideal (b, a*d - 1, a^2 - d^2, d^3 - a) of Multivariate Polynomial Ring in a, b, c, d over Rational Field
+
+The orbit of the point
+[0 0 0 0]
+[0 0 0 0]
+[1 0 0 0]
+[0 0 0 0]
+lies in the component A
+The map from SL_2 is given by
+[ a*c*d^2  b*c*d^2 -a*c^2*d -b*c^2*d]
+[-a*c^2*d -b*c^2*d    a*c^3    b*c^3]
+[   a*d^3    b*d^3 -a*c*d^2 -b*c*d^2]
+[-a*c*d^2 -b*c*d^2  a*c^2*d  b*c^2*d]
+And the stabilizer by the ideal
+Ideal (c, b, d^2 - 1, a*d - 1, a^2 - 1) of Multivariate Polynomial Ring in a, b, c, d over Rational Field
+
+The orbit of the point
+[0 0 0 0]
+[1 0 0 0]
+[0 0 0 0]
+[0 0 0 0]
+lies in the component B
+The map from SL_2 is given by
+[-a^2*b*d -a*b^2*d  a^2*b*c  a*b^2*c]
+[   a^3*d  a^2*b*d   -a^3*c -a^2*b*c]
+[-a*b^2*d   -b^3*d  a*b^2*c    b^3*c]
+[ a^2*b*d  a*b^2*d -a^2*b*c -a*b^2*c]
+And the stabilizer by the ideal
+Ideal (c, b, d^2 - 1, a*d - 1, a^2 - 1) of Multivariate Polynomial Ring in a, b, c, d over Rational Field
+
+The orbit of the point
+[0 0 0 0]
+[0 0 0 0]
+[1 0 0 0]
+[0 1 0 0]
+lies in the component C1
+The map from SL_2 is given by
+[-b*c^2*d + a*c*d^2                  0    b*c^3 - a*c^2*d                  0]
+[                 0 -b*c^2*d + a*c*d^2                  0    b*c^3 - a*c^2*d]
+[  -b*c*d^2 + a*d^3                  0  b*c^2*d - a*c*d^2                  0]
+[                 0   -b*c*d^2 + a*d^3                  0  b*c^2*d - a*c*d^2]
+And the stabilizer by the ideal
+Ideal (c, a - d, d^2 - 1) of Multivariate Polynomial Ring in a, b, c, d over Rational Field
+
+The orbit of the point
+[0 0 0 0]
+[1 0 0 0]
+[0 0 0 0]
+[0 0 1 0]
+lies in the component C3
+The map from SL_2 is given by
+[ (b^2*c - a*b*d)*a  (b^2*c - a*b*d)*b                  0                  0]
+[-(a*b*c - a^2*d)*a -(a*b*c - a^2*d)*b                  0                  0]
+[                 0                  0  (b^2*c - a*b*d)*a  (b^2*c - a*b*d)*b]
+[                 0                  0 -(a*b*c - a^2*d)*a -(a*b*c - a^2*d)*b]
+And the stabilizer by the ideal
+Ideal (b, a - d, d^2 - 1) of Multivariate Polynomial Ring in a, b, c, d over Rational Field
+
+The orbit of the point
+[ 0  1  0  0]
+[ 0  0  0  0]
+[-1  0  0  0]
+[ 0  0  0  0]
+lies in the component C4
+The map from SL_2 is given by
+[                 0   -b*c*d^2 + a*d^3                  0  b*c^2*d - a*c*d^2]
+[                 0  b*c^2*d - a*c*d^2                  0   -b*c^3 + a*c^2*d]
+[   b*c*d^2 - a*d^3                  0 -b*c^2*d + a*c*d^2                  0]
+[-b*c^2*d + a*c*d^2                  0    b*c^3 - a*c^2*d                  0]
+And the stabilizer by the ideal
+Ideal (c, a - d, d^2 - 1) of Multivariate Polynomial Ring in a, b, c, d over Rational Field
+
+The orbit of the point
+[ 0  0  1  0]
+[-1  0  0  0]
+[ 0  0  0  0]
+[ 0  0  0  0]
+lies in the component C2
+The map from SL_2 is given by
+[                 0                  0 -(a*b*c - a^2*d)*a -(a*b*c - a^2*d)*b]
+[ (a*b*c - a^2*d)*a  (a*b*c - a^2*d)*b                  0                  0]
+[                 0                  0 -(b^2*c - a*b*d)*a -(b^2*c - a*b*d)*b]
+[ (b^2*c - a*b*d)*a  (b^2*c - a*b*d)*b                  0                  0]
+And the stabilizer by the ideal
+Ideal (b, a - d, d^2 - 1) of Multivariate Polynomial Ring in a, b, c, d over Rational Field
+
+Classes from Tang et al(2014) correspond to our classes as follows:
+R_1: C2
+R_2: C3
+R_3: B
+R_4: C1
+R_5: C4
+R_6: A
+R_7: A
+R_8: C3
+R_9: C4
+R_10: A
+R_11: B
+R_12: B
+R_13: C2
+R_14: A
+R_15: C1
+R_16: B
+R_17: A
+R_18: A
+R_19: B
+R_20: A
+R_21: B
+

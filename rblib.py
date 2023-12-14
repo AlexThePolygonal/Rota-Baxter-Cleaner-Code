@@ -99,19 +99,13 @@ class OperatorComponent(SageObject):
         UHHH OHHH bad code
         '''
         print("TODO: Does not work!!!")
-        
-        I = sg.macaulay2(self.ideal, "I")
-        J = I.minimalPresentation().sage()
-        Jring = sage.rings.quotient_ring.QuotientRing(J.ring(), J)
-        str_vars = [str(gen) for gen in J.ring().gens()]
-        base_vars = [str(gen) for gen in self.ideal.ring().gens()]
-        str_vars = list(set(base_vars) - set(str_vars))
-        str_vars = [gen[0] + '_{' + gen[1:] + "}" for gen in str_vars]
-        res_string = self.rota_mat._latex_()
-        for var in str_vars:
-            res_string = res_string.replace(var, '0')
-        res = (res_string + '\n' + Jring._latex_()) 
+        matrix, ideal = pretty_print_trimmed(self.ideal, self.rota_mat)
+        res = (f'Operators in {self.name} have the following shape:\n' + matrix._latex_() + 
+            f'\nand their elements must lie in the ideal ' + str(ideal) + ' over the polynomial ring' + 
+            f"\nIts dimension as a projective variety is {self.dimension - 1}" + 
+            ("\nIt is smooth" if self.is_smooth else f"\nIts singular locus is the {self.singular_locus}" )) + '\n' 
         return res
+ 
 
     
     def _repr_(self):
@@ -125,8 +119,6 @@ class OperatorComponent(SageObject):
             ("\nIt is smooth" if self.is_smooth else f"\nIts singular locus is the {self.singular_locus}" )) + '\n' 
         return res
 
-
-            
         
 
 def get_components_of_variety(ideal, rota_mat):
@@ -148,11 +140,14 @@ class RBClassifier(SageObject):
           `self.gen_vars` --- the vars corresponding to gens
     '''
 
-    class OpGubarevRepr():
-        gub_dictionary = {}
+    class OpRepr():
         rota_dictionary = {}
         rota_mat = None
         ring = sg.SR
+        name = ""
+
+    class OpGubarevRepr(OpRepr):
+        gub_dictionary = {}
 
         def __init__(self, rbclass, d) -> None:
             # for k, v in d.items():
@@ -162,6 +157,7 @@ class RBClassifier(SageObject):
             #         print()
             #         print(d)
             #         raise RuntimeError("Error during construction of Rota Operator from Gubarev representation")
+            super().__init__()
             self.gub_dictionary = d
             to_subst = dict([
                 (var, 0) for var in rbclass.rota_vars
@@ -193,8 +189,20 @@ class RBClassifier(SageObject):
                 res.append(a-b)
             return self.ring.ideal(res)
     
-    def from_gub_repr(self, d) -> OpGubarevRepr:
-        return self.OpGubarevRepr(self, d)
+    def from_gub_repr(self, d, name = "") -> OpGubarevRepr:
+        res = self.OpGubarevRepr(self, d)
+        res.name = ""
+        return res
+    
+    def from_mat(self, mat, name = "") -> OpRepr:
+        res = self.OpRepr()
+        res.name = name
+        res.rota_mat = mat
+        res.rota_dictionary = {}
+        for i in range(self.dim):
+            for j in range(self.dim):
+                res.rota_dictionary[self.rota_vars[i*self.dim + j]] = res.rota_mat[i,j]
+        return res
 
 
     def __init__(self, weight) -> None:
@@ -326,7 +334,8 @@ class ActionMnClassifier(MnClassifier):
 
     def __init__(self, dim, weight) -> None:
         super().__init__(dim, weight)
-        vars_long = list(map(chr, range(97, 123)))[:dim**2]
+        # vars_long = list(map(chr, range(97, 123)))[:dim**2]
+        vars_long = ['x', 'y', 'z', 't', 'w', 'u', 'r', 's', 'p', 'q']
         self.sl_vars = sg.SR.var(','.join(vars_long))
         self.sl_ring = sage.rings.polynomial.polynomial_ring_constructor.PolynomialRing(sg.QQ, self.sl_vars)
         self.sl_vars = self.sl_ring.gens()
