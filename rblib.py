@@ -108,7 +108,7 @@ def is_absolutely_prime(sage_QQ_ideal : sage.rings.ideal.Ideal) -> bool:
     return singular.execute("size(absolute_primes)") == '1'
 
 def singular_locus(ideal : sage.rings.ideal.Ideal) -> sage.rings.ideal.Ideal:
-    return ideal
+    # return ideal
     I = sg.macaulay2(ideal, "I")
     J = I.minimalPresentation()
     singlocJ = J.singularLocus().ideal().radical()
