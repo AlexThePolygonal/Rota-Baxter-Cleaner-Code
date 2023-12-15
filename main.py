@@ -5,10 +5,11 @@ classifier = ActionMnClassifier(2, sg.SR(sg.Integer(0)))
 # classifier = ActionMnClassifier(2, sg.SR.var('w_0'))
 classifier.classify()
 
-print(f"The number of classes is {len(classifier.QQ_comps)}")
+print(f"The number of classes is ${len(classifier.QQ_comps)}$.")
 
 names = ["C1", "C2", "C3", "C4", "A", "B", "A∩B"]
 print('The projective variety of Rota-Baxter operators consists of 6 components: four curves $C_1, C_2, C_3, C_4$ and two surfaces $A$ and $B$.')
+print("\\begin{itemize}")
 for i in range(len(classifier.QQ_comps)):
     print("\item")
     classifier.QQ_comps[i].name = names[i]
@@ -17,12 +18,14 @@ for i in range(len(classifier.QQ_comps)):
     # print(classifier.QQ_comps[i].rota_mat)
     # print(classifier.QQ_comps[i].ideal)
     # print()
-
+print("\\end{itemize}")
 print('\n\n\n')
 
-singular_locus = OperatorComponent(classifier.singular_locus, classifier.rota_mat, "$A \cap B$")
+singular_locus = OperatorComponent(classifier.singular_locus, classifier.rota_mat, "A∩B")
 
 print(singular_locus._latex_())
+
+total_comps = dict([(comp.name, comp) for comp in (classifier.QQ_comps + [singular_locus])])
 
 e11, e12, e21, e22 = classifier.gen_vars
 
@@ -48,7 +51,8 @@ for orbit in gubarev_orbits:
     print("lies in the component " + (classifier.get_components_of_orbit(phi)))
     print("The map from SL_2 is given by")
     # print(orbit.rota_mat.subs(phi.rota_dictionary))
-    print("$$" + phi.rota_mat._latex_() + "$$")
+    print(classifier.print_orbit(phi, total_comps))
+    # print("$$" + phi.rota_mat._latex_() + "$$")
     print("And the stabilizer by the ideal")
     print("$" + (classifier.preimage_of(orbit, phi) + classifier.affine_sl_locus).radical()._latex_() + "$")
     
