@@ -1,0 +1,251 @@
+\documentclass{amsart}
+\usepackage[T1]{fontenc}
+\newtheorem{theorem}[subsection]{Theorem}
+
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\DeclareRobustCommand{\sagelogo}{%
+  \begin{tikzpicture}[line width=.2ex,line cap=round,rounded corners=.01ex,baseline=-.2ex]
+    \draw(0,0) -- (.75em,0) 
+      -- (.75em,.7ex) -- (.25em,.7ex) 
+      -- (.25em,.75\ht\strutbox) -- (.75em,.75\ht\strutbox);
+    \draw(2em,0) -- (1.6em,0)
+      -- (1.3em,.75\ht\strutbox) -- (.9em,.75\ht\strutbox)
+      -- (.9em,0) -- (1.3em,0)
+      -- (1.6em,.75\ht\strutbox) -- (2.1em,.75\ht\strutbox)
+      -- (2.1em,-\dp\strutbox) -- (1.45em,-\dp\strutbox);
+    \draw(3em,0) -- (2.25em,0)
+      -- (2.25em,.75\ht\strutbox) -- (2.8em,.75\ht\strutbox)
+      -- (2.8em,.7ex) -- (2.35em, .7ex);
+  \end{tikzpicture}%
+}
+
+
+\title{On the classification of Rota-Baxter operators over $M_2(\mathbb{C})$}
+\author{TODO}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+    A more refined classification of Rota-Baxter operators over $M_2(\mathbb{C})$ is presented.
+\end{abstract}
+
+\maketitle
+
+\section{Raw results}
+As proposed in \cite{TANG2014}, we utilized Computer Algebra systems \sagelogo \cite{sagemath}, {SINGULAR} \cite{singular} and {Macaulay2} \cite{Macaulay2} to classify Rota-Baxter operators. The supporting code is \href{https://github.com/AlexThePolygonal/Rota-Baxter-Cleaner-Code}{available on github}.
+
+The projective variety of Rota-Baxter operators consists of 6 components: four curves $C_1, C_2, C_3, C_4$ and two surfaces $A$ and $B$.
+\begin{itemize}
+\item
+Operators in C1 have the following shape:
+$$\left(\begin{array}{rrrr}
+-c & 0 & a & 0 \\
+0 & -c & 0 & a \\
+b & 0 & c & 0 \\
+0 & b & 0 & c
+\end{array}\right)$$
+and their elements must lie in the ideal \begin{align*}
+a b + c^{2} = 0 
+\end{align*}
+Its dimension as a projective variety is 1.
+It is smooth.
+
+\item
+Operators in C2 have the following shape:
+$$\left(\begin{array}{rrrr}
+0 & 0 & -b & -a \\
+b & a & 0 & 0 \\
+0 & 0 & -a & -c \\
+a & c & 0 & 0
+\end{array}\right)$$
+and their elements must lie in the ideal \begin{align*}
+-a^{2} + b c = 0 
+\end{align*}
+Its dimension as a projective variety is 1.
+It is smooth.
+
+\item
+Operators in C3 have the following shape:
+$$\left(\begin{array}{rrrr}
+-a & c & 0 & 0 \\
+b & a & 0 & 0 \\
+0 & 0 & -a & c \\
+0 & 0 & b & a
+\end{array}\right)$$
+and their elements must lie in the ideal \begin{align*}
+a^{2} + b c = 0 
+\end{align*}
+Its dimension as a projective variety is 1.
+It is smooth.
+
+\item
+Operators in C4 have the following shape:
+$$\left(\begin{array}{rrrr}
+0 & -a & 0 & -c \\
+0 & -c & 0 & -b \\
+a & 0 & c & 0 \\
+c & 0 & b & 0
+\end{array}\right)$$
+and their elements must lie in the ideal \begin{align*}
+a b - c^{2} = 0 
+\end{align*}
+Its dimension as a projective variety is 1.
+It is smooth.
+
+\item
+Operators in A have the following shape:
+$$\left(\begin{array}{rrrr}
+-h & -f & -b & -g \\
+-b & -g & c & e \\
+a & d & h & f \\
+h & f & b & g
+\end{array}\right)$$
+and their elements must lie in the ideal \begin{align*}
+-b f + g h = 0 \quad
+-f^{2} + d g = 0 \quad
+b d - f h = 0 \\
+a g - f h = 0 \quad
+a b - h^{2} = 0 \quad
+a f - d h = 0 \\
+e f + g^{2} = 0 \quad
+b g + e h = 0 \quad
+d e + f g = 0 \\
+a e + b f = 0 \quad
+-b e + c g = 0 \quad
+c f + b g = 0 \\
+b^{2} + c h = 0 \quad
+c d + b f = 0 \quad
+a c + b h = 0 
+\end{align*}
+Its dimension as a projective variety is 2.
+It is smooth.
+
+\item
+Operators in B have the following shape:
+$$\left(\begin{array}{rrrr}
+-h & -f & -b & -g \\
+a & h & c & b \\
+-f & d & -g & e \\
+h & f & b & g
+\end{array}\right)$$
+and their elements must lie in the ideal \begin{align*}
+-b f + g h = 0 \quad
+b e + g^{2} = 0 \quad
+f g + e h = 0 \\
+-e f + d g = 0 \quad
+b d + f g = 0 \quad
+f^{2} + d h = 0 \\
+-b^{2} + c g = 0 \quad
+c f - b h = 0 \quad
+c e + b g = 0 \\
+c d + b f = 0 \quad
+a g - b h = 0 \quad
+a b - c h = 0 \\
+a f - h^{2} = 0 \quad
+a e + b f = 0 \quad
+a d + f h = 0 
+\end{align*}
+Its dimension as a projective variety is 2.
+It is smooth.
+
+\end{itemize}
+
+
+
+
+All of the components are smooth. The curves $C_1, \ldots, C_4$ are all disjoint and do not intersect the surfaces. The surfaces intersect, and their intersection is a smooth curve $A \cap B$ operators on which have the following shape:
+$$\left(\begin{array}{rrrr}
+e & -d & -a & -e \\
+-a & -e & b & a \\
+-d & c & -e & d \\
+-e & d & a & e
+\end{array}\right)$$
+and their elements must lie in the ideal \begin{align*}
+a^{2} - b e = 0 \quad
+a d + e^{2} = 0 \quad
+a c + d e = 0 \\
+d^{2} - c e = 0 \quad
+b d + a e = 0 \quad
+b c - e^{2} = 0 
+\end{align*}
+
+
+The transposition antihomomorphism exchanges the curves $C_1$ and $C_3$, $C_2$ and $C_4$, and the surfaces $A$ and $B$, leaving $A \cap B$ fixed.
+
+The group $GL_n(\mathbb{C})$ acts naturally on the projective variety of Rota-Baxter operators. In a previous work by Benito, Gubarev and Pozhidaev \cite{Benito2018}, representatives of these orbits were found in the $2$-dimensional case. We compute the action of $SL_2(\mathbb{C})$ on these representatives and use it to describe the varieties further. Let the elements of $SL_2(\mathbb{C})$ be 
+\[\begin{pmatrix}
+  x & y\\
+  z & t
+\end{pmatrix}\]
+Note that the action of conjugation by 
+\[\begin{pmatrix}
+  -1 & 0\\
+  0 & -1
+\end{pmatrix}\] is trivial, so the group which acts on the variery is $G$, $SL_2(\mathbb{C})$ factorized by the above matrix.
+
+\begin{itemize}
+  \item The orbit of the points $M_1$ and $M_1^T$ both generate the singular locus $A \cap B$. The action of $G$ is given by
+  \begin{align*}
+&  a = -x y^{3}\\
+  &b = y^{4}\\
+  &c = x^{4}\\
+  &d = x^{3} y\\
+  &e = x^{2} y^{2}
+  &\end{align*}
+  The stabilizer of the action is obvious.
+
+  \item The orbit of the points $M_2$ and $M_2^T$ lie on the surfaces $A$ and $B$. Their stabilizer is trivial, and so $Cone(A\setminus A\cap B) \simeq Cone(B \setminus A \cap B) \simeq SL_2(\mathbb{C})$.
+  The map giving that isomorphism for $A$ is given by 
+  \begin{align*}
+&  a = t x^{3}\\
+  &b = t x y^{2}\\
+  &c = -t y^{3}\\
+  &d = -x^{3} z\\
+  &e = y^{3} z\\
+  &f = -x^{2} y z\\
+  &g = -x y^{2} z\\
+  &h = t x^{2} y
+  &\end{align*}
+ \item  The orbits of the points $M_3$ and $M_3^T$ are the curves $C_1$ and $C_3$ respectively. 
+  The action of $G$ on $C_1$ is given by
+  \begin{align*}
+  &a = -y^2\\
+  &b = x^2\\
+  &c = xy
+  \end{align*}
+
+  \item  The orbits of the points $M_4$ and $M_4^T$ are the curves $C_4$ and $C_2$ respectively. 
+  The action of $G$ on $C_4$ is given by
+  \begin{align*}
+  &a = -x^2\\
+  &b = -y^2\\
+  &c = -xy
+  \end{align*}
+
+\end{itemize}
+
+Note that the action of $SL_2(\mathbb{C})$ on the orbits of the curves $C_1, \ldots, C_4, A\cap B$ gives their rational parametrisations, proving that they are isomorphic to $\mathbb{P}^1$.
+
+The classes described by Tang et al. \cite{TANG2014} correspond to these as follows:
+\begin{itemize}
+    \item $C_2$: $R_1$,$R_{13}$
+    \item $C_3$: $R_2$,$R_8$
+    \item $B$: $R_3$,$R_{11}$,$R_{12}$,$R_{16}$,$R_{19}$,$R_{21}$
+    \item $C_1$: $R_4$,$R_{15}$
+    \item $C_4$: $R_5$,$R_9$
+    \item $A$: $R_6$,$R_7$,$R_{10}$,$R_{14}$,$R_{17}$,$R_{18}$,$R_{20}$
+\end{itemize}
+
+
+
+
+\section{Limitations}
+
+
+\bibliographystyle{plain}
+\bibliography{annot.bib}
+
+\end{document}
