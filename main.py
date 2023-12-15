@@ -8,16 +8,21 @@ classifier.classify()
 print(f"The number of classes is {len(classifier.QQ_comps)}")
 
 names = ["C1", "C2", "C3", "C4", "A", "B", "A∩B"]
-print('Below is the description of the classes')
+print('The projective variety of Rota-Baxter operators consists of 6 components: four curves $C_1, C_2, C_3, C_4$ and two surfaces $A$ and $B$.')
 for i in range(len(classifier.QQ_comps)):
+    print("\item")
     classifier.QQ_comps[i].name = names[i]
-    print(classifier.QQ_comps[i])
+    print((classifier.QQ_comps[i])._latex_())
+    # print("----------")
+    # print(classifier.QQ_comps[i].rota_mat)
+    # print(classifier.QQ_comps[i].ideal)
+    # print()
 
 print('\n\n\n')
 
-singular_locus = OperatorComponent(classifier.singular_locus, classifier.rota_mat, "A∩B")
+singular_locus = OperatorComponent(classifier.singular_locus, classifier.rota_mat, "$A \cap B$")
 
-print(singular_locus)
+print(singular_locus._latex_())
 
 e11, e12, e21, e22 = classifier.gen_vars
 
@@ -39,16 +44,17 @@ for orbit in gubarev_orbits:
     phi = classifier.conjugate_by_general_aut(orbit)
     
     print("The orbit of the point")
-    # print(orbit)
-    # print("lies in the component " + (classifier.get_components_of_orbit(phi)))
-    # print("The map from SL_2 is given by")
+    print("$$" + orbit._latex_() + "$$")
+    print("lies in the component " + (classifier.get_components_of_orbit(phi)))
+    print("The map from SL_2 is given by")
     # print(orbit.rota_mat.subs(phi.rota_dictionary))
-    # print("And the stabilizer by the ideal")
-    # print((classifier.preimage_of(orbit, phi) + classifier.affine_sl_locus).radical())
+    print("$$" + phi.rota_mat._latex_() + "$$")
+    print("And the stabilizer by the ideal")
+    print("$" + (classifier.preimage_of(orbit, phi) + classifier.affine_sl_locus).radical()._latex_() + "$")
     
-    for eqn in classifier.raw_eqns:
-        if (eqn.subs(phi.rota_dictionary) != 0):
-            print(eqn)
+    # for eqn in classifier.raw_eqns:
+    #     if (eqn.subs(phi.rota_dictionary) != 0):
+    #         print(eqn.subs(phi.rota_dictionary).full_simplify())
 
 
     print()
@@ -196,6 +202,7 @@ tang_classes_base = [
 ]
 
 tang_classes = [classifier.from_mat(mat, name) for name, mat in tang_classes_base]
+
 
 print("Classes from Tang et al(2014) correspond to our classes as follows:")
 for tang_class in tang_classes:

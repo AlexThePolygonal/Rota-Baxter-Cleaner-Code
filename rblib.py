@@ -3,11 +3,12 @@ import sage.all as sg
 from timeit import default_timer as timer
 from sage.structure.sage_object import SageObject
 from sage.all import singular as singular
+import copy
 
 
 _ = singular.LIB("primdec.lib")
 
-def pretty_print_trimmed(ideal, smth):
+def get_ideal_simplification(ideal):
     gens = sorted(ideal.gens(), key= lambda x : x.degree())
     lins = [gen for gen in gens if gen.degree() == 1]
     substs = {}
@@ -29,7 +30,7 @@ def pretty_print_trimmed(ideal, smth):
         if to_elim is not None:
             coeff = lin.monomial_coefficient(to_elim)
             lin_ = lin / coeff - to_elim
-            substs[to_elim] = lin_
+            substs[to_elim] = -lin_
             gens.remove(lin)
     clean_vars = all_vars - set(substs.keys())
     clean_vars = list(clean_vars)
@@ -37,6 +38,11 @@ def pretty_print_trimmed(ideal, smth):
     for v, vv in zip(clean_vars, vars_long):
         substs[v] = vv
     gens = [gen.subs(substs) for gen in gens]
+    return substs, gens
+ 
+
+def pretty_print_trimmed(ideal, smth):
+    substs, gens = get_ideal_simplification(ideal)
     return smth.subs(substs).subs(substs).subs(substs), gens
 
 def get_entries(mat : sg.Matrix) -> list[sg.RingElement]:
@@ -98,12 +104,12 @@ class OperatorComponent(SageObject):
         '''
         UHHH OHHH bad code
         '''
-        print("TODO: Does not work!!!")
+        # print("TODO: Does not work!!!") 
         matrix, ideal = pretty_print_trimmed(self.ideal, self.rota_mat)
-        res = (f'Operators in {self.name} have the following shape:\n' + matrix._latex_() + 
-            f'\nand their elements must lie in the ideal ' + str(ideal) + ' over the polynomial ring' + 
+        res = (f'Operators in {self.name} have the following shape:\n$$' + matrix._latex_() + "$$"
+            f'\nand their elements must lie in the ideal $$' + str(list(map(sg.latex, ideal))) + '$$ over the polynomial ring' + 
             f"\nIts dimension as a projective variety is {self.dimension - 1}" + 
-            ("\nIt is smooth" if self.is_smooth else f"\nIts singular locus is the {self.singular_locus}" )) + '\n' 
+            ("\nIt is smooth" if self.is_smooth else f"\nIts singular locus is the ideal ${self.singular_locus._latex_()}$" )) + '\n' 
         return res
  
 
@@ -175,7 +181,7 @@ class RBClassifier(SageObject):
             self.rota_mat = rbclass.rota_mat.subs(to_subst)
         
         def _latex_(self):
-            return self.rota_mat._latex()
+            return self.rota_mat._latex_()
 
         def __repr__(self):
             return self.rota_mat.__repr__()
@@ -302,11 +308,31 @@ class RBClassifier(SageObject):
         return "∩".join(res)
 
 
+    def rewrite_as_rota(self, func):
+        v = sum([self.gen_vars[i] * self.gens[i] for i in range(len(self.gens))])
+        def take_ith(i):
+            substs = dict([(gv, 0) for gv in self.gen_vars])
+            substs[self.gen_vars[i]] = 1
+            return substs
+        matv = self.to_vector(func(v))
+        res = self.rota_mat
+        def take(i):
+            res = dict([(g, 0) for g in self.gen_vars])
+            res[self.gen_vars[i]] = 1
+            return res
+        
+        for i in range(self.dim):
+            for j in range(self.dim):
+                res[i,j] = matv[i].subs(take(j))[0]
+        return res
 
 
 
 
 class MnClassifier(RBClassifier):
+    alg = sg.MatrixSpace(sg.SR, 1)
+    gens = alg.basis().values()
+    gen_vars = sg.SR.var("erm,sorry")
     '''
     Classify RB-operators on the matrix algebra Mₙ(ℂ)
     '''
@@ -352,8 +378,21 @@ class ActionMnClassifier(MnClassifier):
         self.aut = lambda x : phi * x * adjphi
         self.invaut = lambda x : adjphi * x * phi
 
+        self.phi = phi
+        self.adjphi = adjphi
+    
+
 
     def conjugate_by_general_aut(self, op_mat):
-        res = super().conjugate_by(self.aut, self.invaut, op_mat)
+        if isinstance(op_mat, self.OpGubarevRepr):
+            op_mat = op_mat.rota_mat
+        def func(x):
+            return self.invaut(self.to_matrix(
+                    op_mat * self.to_vector(
+                        self.aut(x)
+                    )
+                ))
+        mat = self.rewrite_as_rota(func)
+        res = self.from_mat(mat)
         res.ring = self.sl_ring
         return res
