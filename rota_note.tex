@@ -180,14 +180,9 @@ The group $GL_n(\mathbb{C})$ acts naturally on the projective variety of Rota-Ba
   x & y\\
   z & t
 \end{pmatrix}\]
-Note that the action of conjugation by 
-\[\begin{pmatrix}
-  -1 & 0\\
-  0 & -1
-\end{pmatrix}\] is trivial, so the group which acts on the variery is $G$, $SL_2(\mathbb{C})$ factorized by the above matrix.
 
 \begin{itemize}
-  \item The orbit of the points $M_1$ and $M_1^T$ both generate the singular locus $A \cap B$. The action of $G$ is given by
+  \item The orbit of the points $M_1$ and $M_1^T$ both generate the singular locus $A \cap B$. The parametrization of the orbit by the $SL_2$-action is given by
   \begin{align*}
 &  a = -x y^{3}\\
   &b = y^{4}\\
@@ -197,8 +192,9 @@ Note that the action of conjugation by
   &\end{align*}
   The stabilizer of the action is obvious.
 
-  \item The orbit of the points $M_2$ and $M_2^T$ lie on the surfaces $A$ and $B$. Their stabilizer is trivial, and so $Cone(A\setminus A\cap B) \simeq Cone(B \setminus A \cap B) \simeq G$.
-  The map giving that isomorphism for $A$ is given by 
+  \item The orbit of the points $M_2$ and $M_2^T$ lie on the surfaces $A$ and $B$ respectively.
+  The stabilizer of the action of $SL_2(\mathbb{C})$ on the point $M_2$ consists of all diagonal matrices in $SL_2(\mathbb{C})$
+  The map giving the orbit for $A$ is given by 
   \begin{align*}
 &  a = t x^{3}\\
   &b = t x y^{2}\\
@@ -209,8 +205,10 @@ Note that the action of conjugation by
   &g = -x y^{2} z\\
   &h = t x^{2} y
   &\end{align*}
+  Note that since there is only one orbit in $A \setminus A\cap B$, then the mapping $SL_2(\mathbb{C}) \to A \setminus A \cap B$ is surjective and $A$ decomposes into two orbits.
+
  \item  The orbits of the points $M_3$ and $M_3^T$ are the curves $C_1$ and $C_3$ respectively. 
-  The action of $G$ on $C_1$ is given by
+  The parametrization of the orbit given by the $SL_2(\mathbb{C})$-action on $C_1$ is given by
   \begin{align*}
   &a = -y^2\\
   &b = x^2\\
@@ -218,7 +216,7 @@ Note that the action of conjugation by
   \end{align*}
 
   \item  The orbits of the points $M_4$ and $M_4^T$ are the curves $C_4$ and $C_2$ respectively. 
-  The action of $G$ on $C_4$ is given by
+  The parametrization of the orbit given by the $SL_2(\mathbb{C})$-action on $C_4$ is given by
   \begin{align*}
   &a = -x^2\\
   &b = -y^2\\
